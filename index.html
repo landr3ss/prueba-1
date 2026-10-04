@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Desarrollo de Software - Gonzalo Escudero</title>
+
+
+    <style>
+
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background-color: #ecf0f1;
+        }
+
+
+        /* =====================================================
+           PARTE SUPERIOR
+        ===================================================== */
+
+        header {
+
+            height: 20%;
+
+            background: linear-gradient(
+                135deg,
+                #1e88e5,
+                #1565c0
+            );
+
+            color: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.2);
+
+        }
+
+
+        header h1 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        header p {
+
+            font-size: 17px;
+
+        }
+
+
+        /* =====================================================
+           CONTENEDOR CENTRAL
+        ===================================================== */
+
+        .contenedor {
+
+            display: flex;
+
+            height: 65%;
+
+        }
+
+
+        /* =====================================================
+           MENU LATERAL
+        ===================================================== */
+
+        aside {
+
+            width: 22%;
+
+            background-color: #263238;
+
+            color: white;
+
+            padding: 18px;
+
+            overflow-y: auto;
+
+        }
+
+
+        aside h2 {
+
+            font-size: 17px;
+
+            text-align: center;
+
+            margin-bottom: 15px;
+
+            color: white;
+
+        }
+
+
+        aside button {
+
+            display: block;
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 6px;
+
+            color: white;
+
+            text-align: left;
+
+            padding: 12px;
+
+            margin-bottom: 8px;
+
+            background-color: #37474f;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+
+        }
+
+
+        aside button:hover {
+
+            background-color: #0288d1;
+
+            transform: translateX(4px);
+
+        }
+
+
+        aside button.activo {
+
+            background-color: #00a8e8;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.3);
+
+        }
+
+
+        /* =====================================================
+           CONTENIDO PRINCIPAL
+        ===================================================== */
+
+        main {
+
+            width: 78%;
+
+            background-color: #f5f7f8;
+
+            padding: 30px;
+
+            overflow-y: auto;
+
+        }
+
+
+        main h1 {
+
+            color: #1565c0;
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+
+        }
+
+
+        main h2 {
+
+            color: #263238;
+
+            margin-top: 20px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        main p {
+
+            color: #455a64;
+
+            line-height: 1.7;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        main ul {
+
+            margin-left: 25px;
+
+            line-height: 1.9;
+
+            color: #455a64;
+
+        }
+
+
+        /* =====================================================
+           TARJETAS
+        ===================================================== */
+
+        .tarjetas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .tarjeta {
+
+            background-color: white;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.12);
+
+            transition: 0.3s;
+
+        }
+
+
+        .tarjeta:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 6px 15px rgba(0,0,0,0.2);
+
+        }
+
+
+        .tarjeta h3 {
+
+            color: #1565c0;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .tarjeta p {
+
+            font-size: 14px;
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =====================================================
+           CAJA DESTACADA
+        ===================================================== */
+
+        .destacado {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e3f2fd,
+                    #bbdefb
+                );
+
+            border-left:
+                6px solid #1565c0;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 5px;
+
+        }
+
+
+        .destacado h3 {
+
+            color: #0d47a1;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* =====================================================
+           BOTON FACEBOOK
+        ===================================================== */
+
+        .facebook {
+
+            display: inline-block;
+
+            background-color: #1877f2;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 6px;
+
+            margin-top: 10px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .facebook:hover {
+
+            background-color: #0d5ec7;
+
+            transform: scale(1.03);
+
+        }
+
+
+        /* =====================================================
+           PARTE INFERIOR
+        ===================================================== */
+
+        footer {
+
+            height: 15%;
+
+            background-color: #263238;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            padding: 15px;
+
+        }
+
+
+        /* =====================================================
+           ADAPTACIÓN PARA CELULARES
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .contenedor {
+
+                flex-direction: column;
+
+                height: 65%;
+
+            }
+
+
+            aside {
+
+                width: 100%;
+
+                height: 35%;
+
+                padding: 10px;
+
+            }
+
+
+            aside h2 {
+
+                margin-bottom: 8px;
+
+            }
+
+
+            aside button {
+
+                display: inline-block;
+
+                width: 48%;
+
+                margin: 2px;
+
+            }
+
+
+            main {
+
+                width: 100%;
+
+                height: 65%;
+
+                padding: 20px;
+
+            }
+
+
+            .tarjetas {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            header h1 {
+
+                font-size: 20px;
+
+            }
+
+
+            header p {
+
+                font-size: 14px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         PARTE SUPERIOR
+    ====================================================== -->
+
+    <header>
+
+        <h1>
+            UNIDAD EDUCATIVA "GONZALO ESCUDERO"
+        </h1>
+
+        <p>
+            Bachillerato Técnico: Desarrollo de Software
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         PARTE CENTRAL
+    ====================================================== -->
+
+    <div class="contenedor">
+
+
+        <!-- =================================================
+             MENU LATERAL
+        ================================================== -->
+
+        <aside>
+
+            <h2>
+                MENÚ PRINCIPAL
+            </h2>
+
+
+            <button
+                class="activo"
+                onclick="mostrarContenido('inicio', this)">
+
+                🏠 Inicio
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('institucion', this)">
+
+                🏫 Institución
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('especialidad', this)">
+
+                💻 Especialidad
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('movil', this)">
+
+                📱 Programación móvil
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('poo', this)">
+
+                💻 Programación Orientada a Objetos
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('bases', this)">
+
+                🗄️ Bases de datos
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('web', this)">
+
+                🌐 Diseño web
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('proyectos', this)">
+
+                🚀 Proyectos
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('perfil', this)">
+
+                👨‍💻 Perfil del estudiante
+
+            </button>
+
+
+            <button
+                onclick="mostrarContenido('contacto', this)">
+
+                📍 Contacto
+
+            </button>
+
+        </aside>
+
+
+        <!-- =================================================
+             CONTENIDO PRINCIPAL
+        ================================================== -->
+
+        <main id="contenido">
+
+
+            <h1>
+                Bienvenidos
+            </h1>
+
+
+            <p>
+
+                Bienvenidos a la página informativa de la
+                Unidad Educativa "Gonzalo Escudero".
+
+            </p>
+
+
+            <div class="destacado">
+
+                <h3>
+                    💻 Bachillerato Técnico:
+                    Desarrollo de Software
+                </h3>
+
+                <p>
+
+                    En esta página podrás conocer información
+                    sobre la institución, su oferta académica,
+                    la especialidad de Desarrollo de Software,
+                    las materias que forman parte de ella y
+                    algunos de los proyectos que pueden desarrollar
+                    los estudiantes.
+
+                </p>
+
+            </div>
+
+
+            <h2>
+                ¿Qué encontrarás?
+            </h2>
+
+
+            <div class="tarjetas">
+
+
+                <div class="tarjeta">
+
+                    <h3>
+                        🏫 Institución
+                    </h3>
+
+                    <p>
+
+                        Información sobre la Unidad Educativa,
+                        sus niveles educativos y su oferta
+                        académica.
+
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>
+                        💻 Desarrollo de Software
+                    </h3>
+
+                    <p>
+
+                        Información sobre la especialidad y
+                        los conocimientos que desarrolla
+                        el estudiante.
+
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>
+                        📚 Materias
+                    </h3>
+
+                    <p>
+
+                        Conoce las materias relacionadas con
+                        programación móvil, POO, bases de
+                        datos y diseño web.
+
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>
+                        🚀 Proyectos
+                    </h3>
+
+                    <p>
+
+                        Conoce ejemplos de proyectos que
+                        pueden desarrollarse aplicando los
+                        conocimientos aprendidos.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         PARTE INFERIOR
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Unidad Educativa "Gonzalo Escudero"
+
+            <br>
+
+            Especialidad: Desarrollo de Software
+
+            <br>
+
+            Zumbagua S15-164 y Catarama,
+            sector La Argelia, al sur de Quito, Ecuador
+
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        function mostrarContenido(seccion, boton) {
+
+
+            /* =================================================
+               OBTENER EL CONTENIDO PRINCIPAL
+            ================================================= */
+
+            let contenido =
+                document.getElementById("contenido");
+
+
+            /* =================================================
+               OBTENER LOS BOTONES
+            ================================================= */
+
+            let botones =
+                document.querySelectorAll(
+                    "aside button"
+                );
+
+
+            /* =================================================
+               QUITAR EL ESTADO ACTIVO
+            ================================================= */
+
+            botones.forEach(function(b) {
+
+                b.classList.remove("activo");
+
+            });
+
+
+            /* =================================================
+               ACTIVAR EL BOTON SELECCIONADO
+            ================================================= */
+
+            boton.classList.add("activo");
+
+
+            /* =================================================
+               INICIO
+            ================================================= */
+
+            if (seccion === "inicio") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        Bienvenidos
+                    </h1>
+
+
+                    <p>
+
+                        Bienvenidos a la página informativa
+                        de la Unidad Educativa "Gonzalo Escudero".
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            💻 Bachillerato Técnico:
+                            Desarrollo de Software
+                        </h3>
+
+                        <p>
+
+                            Esta especialidad permite a los
+                            estudiantes desarrollar conocimientos
+                            relacionados con programación,
+                            desarrollo web, bases de datos,
+                            aplicaciones y creación de soluciones
+                            informáticas.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        ¿Qué encontrarás en esta página?
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🏫 Institución
+                            </h3>
+
+                            <p>
+
+                                Conoce la oferta educativa y
+                                las especialidades que ofrece
+                                la institución.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💻 Especialidad
+                            </h3>
+
+                            <p>
+
+                                Conoce qué es el Desarrollo
+                                de Software y qué habilidades
+                                desarrolla el estudiante.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📚 Materias
+                            </h3>
+
+                            <p>
+
+                                Explora las materias que forman
+                                parte de la formación técnica.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🚀 Proyectos
+                            </h3>
+
+                            <p>
+
+                                Descubre ejemplos de proyectos
+                                que pueden desarrollarse.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               INSTITUCIÓN
+            ================================================= */
+
+            else if (seccion === "institucion") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        🏫 Unidad Educativa "Gonzalo Escudero"
+                    </h1>
+
+
+                    <p>
+
+                        La Unidad Educativa Gonzalo Escudero
+                        ofrece una formación educativa orientada
+                        al desarrollo académico, técnico y
+                        personal de sus estudiantes.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            📚 Oferta educativa
+                        </h3>
+
+                        <p>
+
+                            La institución ofrece Educación
+                            General Básica (EGB), Bachillerato
+                            General Unificado (BGU) y
+                            Bachillerato Técnico.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        🎓 Oferta Académica y Especialidades
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💻 Bachillerato Técnico
+                            </h3>
+
+                            <p>
+
+                                El Bachillerato Técnico permite
+                                desarrollar conocimientos y
+                                habilidades orientadas al ámbito
+                                tecnológico y profesional.
+
+                            </p>
+
+                            <br>
+
+                            <strong>
+                                Especialidades:
+                            </strong>
+
+                            <ul>
+
+                                <li>
+                                    Soporte Informático
+                                </li>
+
+                                <li>
+                                    Desarrollo de Software
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📖 Educación General Básica
+                            </h3>
+
+                            <p>
+
+                                La institución ofrece Educación
+                                General Básica para estudiantes de:
+
+                            </p>
+
+                            <ul>
+
+                                <li>
+                                    8.º año
+                                </li>
+
+                                <li>
+                                    9.º año
+                                </li>
+
+                                <li>
+                                    10.º año
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🎓 Bachillerato General Unificado
+                            </h3>
+
+                            <p>
+
+                                El BGU proporciona una formación
+                                académica integral enfocada en
+                                conocimientos, capacidades y valores.
+
+                            </p>
+
+                            <strong>
+                                Formación:
+                            </strong>
+
+                            <ul>
+
+                                <li>
+                                    Ciencias
+                                </li>
+
+                                <li>
+                                    Valores
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💡 Formación Tecnológica
+                            </h3>
+
+                            <p>
+
+                                Las especialidades técnicas permiten
+                                desarrollar conocimientos relacionados
+                                con tecnología, informática y
+                                desarrollo de soluciones de software.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            💻 Desarrollo de Software
+                        </h3>
+
+                        <p>
+
+                            Dentro del Bachillerato Técnico,
+                            el Desarrollo de Software permite
+                            adquirir conocimientos relacionados
+                            con programación, desarrollo web,
+                            bases de datos, aplicaciones y
+                            resolución de problemas mediante
+                            herramientas tecnológicas.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        🎯 Formación integral
+                    </h2>
+
+
+                    <p>
+
+                        La educación no solamente busca desarrollar
+                        conocimientos técnicos. También busca
+                        fortalecer valores, responsabilidad,
+                        creatividad, pensamiento lógico, trabajo
+                        en equipo y capacidad para resolver problemas.
+
+                    </p>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               ESPECIALIDAD
+            ================================================= */
+
+            else if (seccion === "especialidad") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        💻 Desarrollo de Software
+                    </h1>
+
+
+                    <p>
+
+                        El Desarrollo de Software es un área de
+                        formación tecnológica enfocada en la creación
+                        de programas, aplicaciones y sistemas
+                        informáticos.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🧠 ¿Qué significa desarrollar software?
+                        </h3>
+
+                        <p>
+
+                            Desarrollar software consiste en analizar
+                            una necesidad o problema, diseñar una
+                            posible solución, escribir el código,
+                            realizar pruebas y mejorar el programa
+                            hasta obtener una solución funcional.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        📚 ¿Qué aprende el estudiante?
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🧠 Pensamiento lógico
+                            </h3>
+
+                            <p>
+
+                                El estudiante aprende a analizar
+                                problemas y dividirlos en pasos
+                                ordenados para encontrar soluciones
+                                mediante la programación.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💻 Programación
+                            </h3>
+
+                            <p>
+
+                                Aprende los fundamentos necesarios
+                                para crear programas utilizando
+                                diferentes lenguajes y estructuras
+                                de programación.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🌐 Desarrollo web
+                            </h3>
+
+                            <p>
+
+                                Aprende a desarrollar páginas y
+                                aplicaciones web utilizando tecnologías
+                                como HTML, CSS y JavaScript.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🗄️ Bases de datos
+                            </h3>
+
+                            <p>
+
+                                Aprende a organizar, almacenar y
+                                consultar información mediante
+                                estructuras de bases de datos.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h2>
+                        🎯 Objetivo de la especialidad
+                    </h2>
+
+
+                    <p>
+
+                        Preparar a los estudiantes para analizar
+                        problemas y desarrollar soluciones mediante
+                        programas, aplicaciones, páginas web y
+                        sistemas de información.
+
+                    </p>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               PROGRAMACIÓN MÓVIL
+            ================================================= */
+
+            else if (seccion === "movil") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        📱 Programación Móvil
+                    </h1>
+
+
+                    <p>
+
+                        La Programación Móvil es el área de desarrollo
+                        de software enfocada en la creación de aplicaciones
+                        para dispositivos como teléfonos inteligentes y
+                        tabletas. Esta área permite aplicar los
+                        conocimientos de programación para desarrollar
+                        soluciones que puedan ser utilizadas desde
+                        diferentes dispositivos.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            ¿Por qué es importante la programación móvil?
+                        </h3>
+
+                        <p>
+
+                            Los dispositivos móviles forman parte de la
+                            vida cotidiana de las personas y son utilizados
+                            para comunicarse, estudiar, trabajar,
+                            entretenerse y acceder a diferentes servicios.
+                            Por esta razón, aprender a desarrollar
+                            aplicaciones móviles permite comprender cómo
+                            funcionan muchas de las herramientas
+                            tecnológicas utilizadas diariamente.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        📚 ¿Qué aprende el estudiante?
+                    </h2>
+
+
+                    <p>
+
+                        Durante el aprendizaje de esta área, el estudiante
+                        desarrolla conocimientos relacionados con la lógica
+                        de programación, diseño de interfaces, funcionamiento
+                        de aplicaciones y organización de la información.
+                        También aprende a considerar las necesidades del
+                        usuario antes de desarrollar una aplicación.
+
+                    </p>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📱 Aplicaciones
+                            </h3>
+
+                            <p>
+
+                                Se estudian los fundamentos necesarios
+                                para comprender cómo se construyen
+                                aplicaciones destinadas a dispositivos
+                                móviles y cuáles son sus principales
+                                componentes.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🎨 Interfaces
+                            </h3>
+
+                            <p>
+
+                                El estudiante aprende a organizar
+                                botones, menús, formularios, imágenes
+                                y otros elementos para crear interfaces
+                                claras, organizadas y fáciles de utilizar.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🧠 Lógica de programación
+                            </h3>
+
+                            <p>
+
+                                Se desarrollan habilidades para analizar
+                                problemas, crear algoritmos y establecer
+                                instrucciones que permitan a una
+                                aplicación realizar determinadas acciones.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💾 Gestión de información
+                            </h3>
+
+                            <p>
+
+                                Se comprende cómo una aplicación puede
+                                trabajar con información y cómo los datos
+                                pueden ser almacenados, consultados y
+                                utilizados.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h2>
+                        🚀 Ejemplos de proyectos
+                    </h2>
+
+
+                    <p>
+
+                        Los conocimientos adquiridos pueden aplicarse
+                        en proyectos como aplicaciones para registrar
+                        estudiantes, consultar calificaciones,
+                        administrar tareas, controlar inventarios o
+                        presentar información de una institución educativa.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🎯 Objetivo
+                        </h3>
+
+                        <p>
+
+                            El objetivo es que el estudiante comprenda
+                            el proceso de creación de una aplicación
+                            móvil, desde la identificación de una
+                            necesidad hasta el diseño, programación
+                            y funcionamiento de una solución tecnológica.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               PROGRAMACIÓN ORIENTADA A OBJETOS
+            ================================================= */
+
+            else if (seccion === "poo") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        💻 Programación Orientada a Objetos
+                    </h1>
+
+
+                    <p>
+
+                        La Programación Orientada a Objetos, conocida
+                        como POO, es un paradigma de programación
+                        utilizado para organizar el código mediante
+                        clases y objetos. Este modelo permite construir
+                        programas de una manera más organizada,
+                        estructurada y fácil de mantener.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🧠 ¿Por qué es importante?
+                        </h3>
+
+                        <p>
+
+                            La POO permite dividir un problema grande
+                            en partes más pequeñas y organizadas.
+                            De esta manera, el programador puede
+                            representar dentro de un programa elementos
+                            que existen en el mundo real, como
+                            estudiantes, profesores, vehículos,
+                            productos, cuentas o usuarios.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        📚 Principales conceptos
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📦 Clases
+                            </h3>
+
+                            <p>
+
+                                Una clase es una estructura que permite
+                                definir las características y
+                                comportamientos que tendrán determinados
+                                objetos. Por ejemplo, una clase
+                                Estudiante puede contener información
+                                como nombre, edad y curso.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔹 Objetos
+                            </h3>
+
+                            <p>
+
+                                Los objetos son elementos creados a
+                                partir de una clase. Cada objeto puede
+                                tener sus propios datos y utilizar las
+                                funciones o comportamientos definidos
+                                por su clase.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔗 Herencia
+                            </h3>
+
+                            <p>
+
+                                La herencia permite que una clase pueda
+                                utilizar características y comportamientos
+                                definidos previamente en otra clase.
+                                Esto ayuda a reutilizar código y
+                                organizar mejor los programas.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔒 Encapsulamiento
+                            </h3>
+
+                            <p>
+
+                                El encapsulamiento permite proteger
+                                los datos internos de un objeto y
+                                controlar la manera en que otras partes
+                                del programa pueden acceder a ellos.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔄 Polimorfismo
+                            </h3>
+
+                            <p>
+
+                                El polimorfismo permite que diferentes
+                                objetos puedan responder de distintas
+                                maneras ante una misma acción. Esto
+                                proporciona flexibilidad al momento
+                                de diseñar programas.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🧩 Abstracción
+                            </h3>
+
+                            <p>
+
+                                La abstracción consiste en representar
+                                las características importantes de un
+                                elemento, evitando mostrar detalles
+                                innecesarios para resolver un determinado
+                                problema.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h2>
+                        🚀 Aplicación práctica
+                    </h2>
+
+
+                    <p>
+
+                        Estos conceptos pueden utilizarse para
+                        desarrollar sistemas académicos, sistemas
+                        de inventario, programas administrativos,
+                        aplicaciones empresariales y diferentes
+                        tipos de software.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🎯 Objetivo
+                        </h3>
+
+                        <p>
+
+                            El objetivo de esta materia es desarrollar
+                            en el estudiante una forma estructurada
+                            de pensar y programar, permitiéndole
+                            construir aplicaciones más organizadas,
+                            reutilizables y fáciles de mantener.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               BASES DE DATOS
+            ================================================= */
+
+            else if (seccion === "bases") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        🗄️ Análisis y Diseño de Bases de Datos
+                    </h1>
+
+
+                    <p>
+
+                        Las bases de datos son fundamentales en el
+                        desarrollo de software porque permiten
+                        almacenar, organizar, consultar y administrar
+                        grandes cantidades de información. Muchos
+                        sistemas informáticos necesitan una base de
+                        datos para trabajar correctamente con la
+                        información de sus usuarios.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            💡 ¿Qué es una base de datos?
+                        </h3>
+
+                        <p>
+
+                            Una base de datos es un conjunto organizado
+                            de información que puede ser almacenada y
+                            posteriormente consultada o modificada.
+                            Por ejemplo, una institución educativa puede
+                            utilizar una base de datos para registrar
+                            estudiantes, profesores, cursos, materias
+                            y calificaciones.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        📚 Conceptos principales
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📋 Tablas
+                            </h3>
+
+                            <p>
+
+                                Las tablas permiten organizar la
+                                información de acuerdo con diferentes
+                                categorías. Una tabla puede almacenar,
+                                por ejemplo, los datos de los estudiantes
+                                de una institución.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📝 Registros
+                            </h3>
+
+                            <p>
+
+                                Un registro representa un elemento
+                                individual dentro de una tabla.
+                                Por ejemplo, cada estudiante registrado
+                                puede representar un registro diferente.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔑 Claves primarias
+                            </h3>
+
+                            <p>
+
+                                Una clave primaria permite identificar
+                                de manera única cada registro de una
+                                tabla y evita que diferentes elementos
+                                tengan el mismo identificador.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔗 Relaciones
+                            </h3>
+
+                            <p>
+
+                                Las relaciones permiten conectar
+                                información almacenada en diferentes
+                                tablas. Por ejemplo, relacionar
+                                estudiantes con cursos y calificaciones.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🔐 Claves foráneas
+                            </h3>
+
+                            <p>
+
+                                Las claves foráneas permiten establecer
+                                relaciones entre tablas utilizando
+                                información que identifica registros
+                                de otra tabla.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💻 SQL
+                            </h3>
+
+                            <p>
+
+                                SQL es un lenguaje utilizado para
+                                realizar operaciones sobre bases
+                                de datos, como consultar, agregar,
+                                modificar y eliminar información.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h2>
+                        🏫 Ejemplo aplicado a una institución educativa
+                    </h2>
+
+
+                    <p>
+
+                        Un sistema académico podría contar con tablas
+                        para estudiantes, profesores, materias, cursos
+                        y calificaciones. Estas tablas pueden relacionarse
+                        para obtener información específica, como las
+                        materias que cursa un estudiante o las
+                        calificaciones obtenidas durante un período
+                        académico.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🎯 Objetivo
+                        </h3>
+
+                        <p>
+
+                            El objetivo de esta materia es que el
+                            estudiante comprenda cómo analizar las
+                            necesidades de información de un sistema
+                            y diseñe estructuras de datos que permitan
+                            almacenar y administrar esa información
+                            de manera organizada y eficiente.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               DISEÑO WEB
+            ================================================= */
+
+            else if (seccion === "web") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        🌐 Diseño Web
+                    </h1>
+
+
+                    <p>
+
+                        El Diseño Web es el área relacionada con la
+                        creación y presentación de páginas y aplicaciones
+                        que pueden ser visualizadas mediante un navegador.
+                        Combina estructura, diseño, organización de
+                        información e interacción para ofrecer una
+                        experiencia adecuada al usuario.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🌎 ¿Por qué es importante el desarrollo web?
+                        </h3>
+
+                        <p>
+
+                            Actualmente, las páginas web son utilizadas
+                            por instituciones educativas, empresas,
+                            organizaciones y personas para presentar
+                            información, ofrecer servicios y comunicarse
+                            con diferentes usuarios. Por esta razón,
+                            conocer desarrollo web constituye una
+                            habilidad importante dentro de la formación
+                            en Desarrollo de Software.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        📚 Principales tecnologías
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🧱 HTML
+                            </h3>
+
+                            <p>
+
+                                HTML permite construir la estructura
+                                de una página web. Mediante sus elementos
+                                se pueden organizar títulos, párrafos,
+                                imágenes, enlaces, formularios, tablas
+                                y diferentes secciones.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🎨 CSS
+                            </h3>
+
+                            <p>
+
+                                CSS permite controlar la apariencia
+                                visual de una página. Se utiliza para
+                                definir colores, tamaños, fuentes,
+                                espacios, posiciones, fondos, bordes
+                                y diferentes estilos.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                ⚙️ JavaScript
+                            </h3>
+
+                            <p>
+
+                                JavaScript permite agregar comportamiento
+                                e interacción a una página web. Puede
+                                utilizarse para crear botones interactivos,
+                                menús, formularios, animaciones y
+                                contenido dinámico.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📱 Diseño Responsive
+                            </h3>
+
+                            <p>
+
+                                El diseño responsive permite que una
+                                página pueda adaptarse a diferentes
+                                tamaños de pantalla, como computadoras,
+                                tablets y teléfonos móviles.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h2>
+                        🖥️ Elementos de una página web
+                    </h2>
+
+
+                    <p>
+
+                        Durante el aprendizaje del diseño web,
+                        el estudiante puede trabajar con encabezados,
+                        menús de navegación, imágenes, botones,
+                        formularios, tarjetas informativas, enlaces
+                        y diferentes estructuras para organizar
+                        correctamente el contenido.
+
+                    </p>
+
+
+                    <h2>
+                        🚀 Aplicación práctica
+                    </h2>
+
+
+                    <p>
+
+                        Los conocimientos de diseño web pueden
+                        utilizarse para crear páginas institucionales,
+                        portafolios personales, sitios informativos,
+                        páginas empresariales, sistemas educativos
+                        y diferentes aplicaciones que funcionen
+                        desde un navegador.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🎯 Objetivo
+                        </h3>
+
+                        <p>
+
+                            El objetivo es que el estudiante pueda
+                            diseñar y desarrollar páginas web
+                            funcionales, organizadas, atractivas
+                            y adaptables a diferentes dispositivos,
+                            utilizando correctamente las tecnologías
+                            fundamentales del desarrollo web.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               PROYECTOS
+            ================================================= */
+
+            else if (seccion === "proyectos") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        🚀 Proyectos de la Especialidad
+                    </h1>
+
+
+                    <p>
+
+                        Los proyectos permiten aplicar los
+                        conocimientos aprendidos durante la formación
+                        y desarrollar soluciones para situaciones
+                        reales. La práctica permite que el estudiante
+                        transforme sus conocimientos teóricos en
+                        productos tecnológicos funcionales.
+
+                    </p>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🌐 Página web institucional
+                            </h3>
+
+                            <p>
+
+                                Creación de una página web para
+                                presentar información sobre una
+                                institución educativa, sus actividades,
+                                especialidades y datos de contacto.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                📱 Aplicación móvil
+                            </h3>
+
+                            <p>
+
+                                Desarrollo de una aplicación que
+                                permita consultar información,
+                                registrar datos o facilitar alguna
+                                actividad cotidiana.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                🗄️ Sistema académico
+                            </h3>
+
+                            <p>
+
+                                Desarrollo de un sistema para
+                                administrar estudiantes, materias,
+                                cursos y calificaciones utilizando
+                                una base de datos.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                💻 Sistema informático
+                            </h3>
+
+                            <p>
+
+                                Desarrollo de programas destinados
+                                a resolver necesidades específicas
+                                de una institución, empresa o usuario.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🧠 Aprender haciendo
+                        </h3>
+
+                        <p>
+
+                            Los proyectos permiten fortalecer la
+                            creatividad, el trabajo en equipo,
+                            la responsabilidad y la capacidad para
+                            resolver problemas mediante herramientas
+                            tecnológicas.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               PERFIL DEL ESTUDIANTE
+            ================================================= */
+
+            else if (seccion === "perfil") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        👨‍💻 Perfil del Estudiante
+                    </h1>
+
+
+                    <p>
+
+                        El estudiante de la especialidad de
+                        Desarrollo de Software desarrolla
+                        conocimientos técnicos y habilidades
+                        que le permiten participar en proyectos
+                        tecnológicos y buscar soluciones a
+                        diferentes problemas mediante la informática.
+
+                    </p>
+
+
+                    <h2>
+                        🧠 Habilidades desarrolladas
+                    </h2>
+
+
+                    <ul>
+
+                        <li>
+                            Pensamiento lógico.
+                        </li>
+
+                        <li>
+                            Resolución de problemas.
+                        </li>
+
+                        <li>
+                            Análisis de información.
+                        </li>
+
+                        <li>
+                            Trabajo colaborativo.
+                        </li>
+
+                        <li>
+                            Creatividad.
+                        </li>
+
+                        <li>
+                            Responsabilidad.
+                        </li>
+
+                        <li>
+                            Uso de herramientas tecnológicas.
+                        </li>
+
+                        <li>
+                            Capacidad de aprendizaje.
+                        </li>
+
+                    </ul>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🎯 Proyección profesional
+                        </h3>
+
+                        <p>
+
+                            Los conocimientos adquiridos pueden
+                            servir como base para continuar estudios
+                            superiores relacionados con informática,
+                            software, sistemas, programación y
+                            tecnología.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =================================================
+               CONTACTO
+            ================================================= */
+
+            else if (seccion === "contacto") {
+
+
+                contenido.innerHTML = `
+
+                    <h1>
+                        📍 Información de Contacto
+                    </h1>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            🏫 Unidad Educativa "Gonzalo Escudero"
+                        </h3>
+
+                        <p>
+
+                            Institución educativa que ofrece
+                            Educación General Básica, Bachillerato
+                            General Unificado y Bachillerato Técnico.
+
+                        </p>
+
+                    </div>
+
+
+                    <h2>
+                        📍 Ubicación
+                    </h2>
+
+
+                    <p>
+
+                        <strong>
+                            Dirección:
+                        </strong>
+
+                        Zumbagua S15-164 y Catarama,
+                        sector La Argelia, al sur de Quito.
+
+                    </p>
+
+
+                    <h2>
+                        📞 Teléfonos
+                    </h2>
+
+
+                    <div class="tarjetas">
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                ☎️ Teléfono 1
+                            </h3>
+
+                            <p>
+                                02 378 670
+                            </p>
+
+                        </div>
+
+
+                        <div class="tarjeta">
+
+                            <h3>
+                                ☎️ Teléfono 2
+                            </h3>
+
+                            <p>
+                                02 735 330
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h2>
+                        📱 Plataforma oficial
+                    </h2>
+
+
+                    <p>
+
+                        Puedes conocer más información,
+                        actividades y novedades de la institución
+                        visitando su página oficial en Facebook.
+
+                    </p>
+
+
+                    <div class="destacado">
+
+                        <h3>
+                            📘 Facebook oficial
+                        </h3>
+
+                        <p>
+
+                            Unidad Educativa Gonzalo Escudero
+
+                        </p>
+
+
+                        <a
+                            class="facebook"
+                            href="https://www.facebook.com/profile.php?id=61567622221116"
+                            target="_blank">
+
+                            📘 Visítanos en Facebook
+
+                        </a>
+
+                    </div>
+
+
+                    <h2>
+                        💻 Especialidad
+                    </h2>
+
+
+                    <p>
+
+                        <strong>
+                            Bachillerato Técnico -
+                            Desarrollo de Software
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+
+                        Esta especialidad prepara a los estudiantes
+                        en áreas relacionadas con programación,
+                        desarrollo web, bases de datos, aplicaciones
+                        y creación de soluciones informáticas.
+
+                    </p>
+
+                `;
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
